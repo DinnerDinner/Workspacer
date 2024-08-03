@@ -1,0 +1,9 @@
+{
+    "name": "com.example.urlfetcher",
+    "description": "Save URLs to a file",
+    "path": "C:\\Users\\Pro\\~Work~\\Programs\\Workspacer\\v3\\save_urls.py",
+    "type": "stdio",
+    "allowed_origins": [
+      "chrome-extension://pmkidohmaanedeeaofblpcoihagdcpan/"
+    ]
+}

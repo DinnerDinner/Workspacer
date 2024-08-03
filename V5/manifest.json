@@ -1,0 +1,17 @@
+{
+    "manifest_version": 3,
+    "name": "The Url Fetcher",
+    "version": "5.0",
+    "description": "Fetch all the open chrome tabs",
+    "permissions": [
+      "tabs",
+      "storage",
+      "nativeMessaging",
+      "activeTab"  
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_icon": "icon.jpg"
+    }
+  }
+  
