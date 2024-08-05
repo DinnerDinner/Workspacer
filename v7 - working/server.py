@@ -12,7 +12,8 @@ SAVE_DIRECTORY = r'C:\\Users\\Pro\\~Work~\\Programs\\Workspacer\\v7 - working\\n
 def save_urls():
     data = request.get_json()
     urls = data.get('urls', [])
-    filename = data.get('filename', 'myurls.txt')
+    a = str(input("Input a filename: ") + ".txt") # Considering it will fetch the name from main.py later
+    filename = data.get('filename', a)
     
     if not urls:
         return jsonify({'status': 'error', 'message': 'No URLs provided'})

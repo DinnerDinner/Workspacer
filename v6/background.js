@@ -32,12 +32,12 @@
 //         });
 //     });
 // });
-
+const HARD_CODED_FILENAME = 'myurls.txt';
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "fetch_and_save_urls") {
         chrome.tabs.query({ currentWindow: true }, (tabs) => {
             let urls = tabs.map(tab => tab.url);
-            const HARD_CODED_FILENAME = 'myurls.txt';
+            
 
             fetch('http://localhost:5000/save_urls', {
                 method: 'POST',

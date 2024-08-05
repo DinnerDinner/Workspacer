@@ -1,6 +1,0 @@
-https://www.youtube.com/watch?v=Odei9r2SB78
-https://www.google.com/search?q=how+to+setup+native+messaging+with+google+extension+for+copying+tabs
-https://developer.chrome.com/docs/extensions/develop/concepts/native-messaging
-https://www.google.com/search?q=session+saver+github
-https://www.youtube.com/watch?v=Is_ZA4yxliE
-https://chatgpt.com/c/d2bdff94-5aa9-4dfc-aa1b-e9b896a9e32b

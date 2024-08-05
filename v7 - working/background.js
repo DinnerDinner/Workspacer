@@ -1,4 +1,4 @@
-const HARD_CODED_FILENAME = 'myurls.txt';
+// const HARD_CODED_FILENAME = 'myurls.txt';
 chrome.action.onClicked.addListener(() => {
     chrome.tabs.query({ currentWindow: true }, (tabs) => {
         let urls = tabs.map(tab => tab.url);
@@ -17,7 +17,7 @@ chrome.action.onClicked.addListener(() => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ urls: urls, filename: HARD_CODED_FILENAME }),
+            body: JSON.stringify({ urls: urls }),
         })
         .then(response => response.json())
         .then(data => {

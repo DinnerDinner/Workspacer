@@ -38,50 +38,48 @@ from pathlib import Path
 import pygetwindow as gw
 import pyautogui
 import time
+import subprocess
+from flask import Flask, request, jsonify
+import os
+import subprocess
+import time
+from pywinauto import application
 
 app = Flask(__name__)
-CORS(app)  # Allow all CORS requests
+CORS(app)
 
-# Define the hardcoded path for saving files
-SAVE_DIR = Path("C:/Users/Pro/~Work~/Programs/Workspacer/v6/new_files")
-
-# Ensure the directory exists
-SAVE_DIR.mkdir(parents=True, exist_ok=True)
 
 @app.route('/save_urls', methods=['POST'])
 def save_urls():
+    data = request.get_json()
+    urls = data.get('urls')
+    filename = data.get('filename', 'myurls.txt')
+    file_path = os.path.join(r'C:\Users\Pro\~Work~\Programs\Workspacer\v6\new_files', filename)
     try:
-        data = request.get_json()
-        urls = data.get('urls', [])
-        filename = data.get('filename', 'myurls.txt')
-
-        # Construct the full path to save the file
-        save_path = SAVE_DIR / filename
-
-        # Save URLs to the file
-        with open(save_path, 'w') as file:
+        with open(file_path, 'w') as file:
             file.write('\n'.join(urls))
-
-        return jsonify({"status": "success"}), 200
+        return jsonify({"status": "success", "message": "URLs saved successfully!"})
     except Exception as e:
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({"status": "error", "message": str(e)})
 
 @app.route('/trigger_extension', methods=['POST'])
 def trigger_extension():
     try:
-        # Focus the Chrome window and send a message to the extension
-        chrome_windows = [window for window in gw.getWindowsWithTitle('Chrome') if window.visible]
-        if chrome_windows:
-            chrome_windows[0].activate()
-            time.sleep(1)  # Small delay to ensure the window is focused
-
-            # Trigger the extension action via keyboard shortcut
-            pyautogui.hotkey('ctrl', 'shift', 'e')  # Example shortcut, modify as needed
-
-        return jsonify({"status": "success"}), 200
+        app = application.Application().connect(title_re=".*Chrome.*")
+        chrome_window = app.top_window()
+        chrome_window.set_focus()
+        
+        time.sleep(1)  # Give Chrome some time to be in the foreground
+        
+        with open('extension_trigger.bat', 'w') as bat_file:
+            bat_file.write(r'''
+            @echo off
+            start chrome-extension://kpcbodepepkjkekimepplmneglbihbgm/
+            ''')
+        subprocess.call(['extension_trigger.bat'])
+        return jsonify({"status": "success", "message": "Extension triggered successfully!"})
     except Exception as e:
-        print(f"Error triggering extension: {e}")
-        return jsonify({"status": "error", "message": str(e)}), 500
+        return jsonify({"status": "error", "message": str(e)})
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(port=5000)
