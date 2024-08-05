@@ -33,21 +33,12 @@
 
 
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-from pathlib import Path
-import pygetwindow as gw
-import pyautogui
-import time
-import subprocess
-from flask import Flask, request, jsonify
 import os
 import subprocess
 import time
 from pywinauto import application
 
 app = Flask(__name__)
-CORS(app)
-
 
 @app.route('/save_urls', methods=['POST'])
 def save_urls():
@@ -65,18 +56,18 @@ def save_urls():
 @app.route('/trigger_extension', methods=['POST'])
 def trigger_extension():
     try:
+        # Use pywinauto to bring Chrome to the foreground
         app = application.Application().connect(title_re=".*Chrome.*")
         chrome_window = app.top_window()
         chrome_window.set_focus()
-        
+
         time.sleep(1)  # Give Chrome some time to be in the foreground
-        
-        with open('extension_trigger.bat', 'w') as bat_file:
-            bat_file.write(r'''
-            @echo off
-            start chrome-extension://kpcbodepepkjkekimepplmneglbihbgm/
-            ''')
-        subprocess.call(['extension_trigger.bat'])
+
+        # Directly open the Chrome extension page using subprocess
+        extension_url = 'chrome-extension://kpcbodepepkjkekimepplmneglbihbgm/'
+        chrome_path = r'C:\Program Files\Google\Chrome\Application\chrome.exe'  # Update with your actual Chrome path
+        subprocess.Popen([chrome_path, extension_url])
+
         return jsonify({"status": "success", "message": "Extension triggered successfully!"})
     except Exception as e:
         return jsonify({"status": "error", "message": str(e)})

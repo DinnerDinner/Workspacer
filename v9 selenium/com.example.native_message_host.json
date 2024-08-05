@@ -1,0 +1,10 @@
+{
+    "name": "com.example.native_message_host",
+    "description": "Native messaging host for my extension",
+    "path": "path_to_your_executable_or_script",
+    "type": "stdio",
+    "allowed_origins": [
+      "chrome-extension:///olifadgjmpmjoiohjlgomkojaafaghib/"
+    ]
+  }
+  

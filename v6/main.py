@@ -25,7 +25,6 @@
 #     trigger_extension()
 
 
-
 import requests
 
 def trigger_extension():

@@ -22,5 +22,5 @@ def open_urls_in_chrome(file_path):
     keyboard.press_and_release('ctrl+9')
 
 if __name__ == "__main__":
-    file_path = ("C:/Users/Pro/~Work~/Programs/Workspacer/v7 - working/new_files/book.txt")  # Example: 'C:/path/to/urls.txt'
+    file_path = ("C:/Users/Pro/~Work~/Programs/Workspacer/v7 - working/new_files/test1.txt")  # Example: 'C:/path/to/urls.txt'
     open_urls_in_chrome(file_path)

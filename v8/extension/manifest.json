@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Another Selenium Test URL Fetcher - Working",
+  "version": "8.0",
+  "description": "Fetch all the open chrome tabs",
+  "permissions": [
+      "tabs",
+      "storage",
+      "activeTab",
+      "scripting",
+      "nativeMessaging",
+      "downloads"
+  ],
+  "background": {
+      "service_worker": "background.js"
+  },
+  "action": {
+      "default_icon": "icon.jpg"
+  }
+}
