@@ -56,4 +56,4 @@ pollServer();
 // Start the keep-alive mechanism
 keepAlive();
 
-setInterval(reloadServiceWorker, 15 * 1000);
+setInterval(reloadServiceWorker, 75 * 1000);
